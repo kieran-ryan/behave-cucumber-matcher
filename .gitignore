@@ -101,7 +101,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
+docs/
 
 # PyBuilder
 target/
@@ -207,15 +207,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
-### Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!*.code-snippets
-*.code-workspace
 
 # Local History for Visual Studio Code
 .history/

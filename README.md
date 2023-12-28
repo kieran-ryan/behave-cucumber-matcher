@@ -1,87 +1,130 @@
-# Python Package Template
+# Behave Cucumber Matcher
 
-[![Release version](https://img.shields.io/badge/dynamic/json?color=green&label=version&query=%24.info.version&url=https%3A%2F%2Ftest.pypi.org%2Fpypi%2Fpysamplelib%2Fjson)](https://test.pypi.org/pypi/pysamplelib)
+[![Release version](https://img.shields.io/badge/dynamic/json?color=green&label=version&query=%24.info.version&url=https%3A%2F%2Ftest.pypi.org%2Fpypi%2Fbehave-cucumber-matcher%2Fjson)](https://test.pypi.org/pypi/behave-cucumber-matcher)
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Python version](https://img.shields.io/badge/python-3.10-blue)
+[![Python versions](https://img.shields.io/pypi/pyversions/behave-cucumber-matcher.svg)](https://pypi.org/pypi/behave-cucumber-matcher)
 ![Supported platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Windows%20%7C%20Linux-green)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
-![Pipeline status](https://github.com/kieran-ryan/python-package-template/actions/workflows/main.yml/badge.svg)
+![Pipeline status](https://github.com/kieran-ryan/behave-cucumber-matcher/actions/workflows/main.yml/badge.svg)
 
-A template repository for creating Python packages.
-
-## Features
-
-- Common repository files:
-  - `.gitignore` with common files to be excluded by git for Python
-  - `.pre-commit-config.yaml` with automated pre-commit validation for Python
-  - `LICENSE` outlining usage rights
-  - `Makefile` standardising commands
-  - `CODE_OF_CONDUCT.md` outlining community practice
-  - `OWNERS.md` outlining owners and roles
-  - `README.md` overview documentation
-- Tool configuration:
-  - [editorconfig](https://editorconfig.org) - universal editor configuration
-  - [ruff](https://github.com/charliermarsh/ruff) - linting
-  - [perflint](https://github.com/tonybaloney/perflint) - linting performance anti-patterns
-  - [mypy](https://mypy.readthedocs.io) - type checking
-  - [bandit](https://bandit.readthedocs.io/en/latest/) - vulnerability detection
-  - [black](https://black.readthedocs.io/en/stable/) - code style formatting
-  - [blacken-docs](https://pypi.org/project/blacken-docs/) - code style formatting in docs
-  - [pyupgrade](https://github.com/asottile/pyupgrade) - latest syntax upgrades
-  - [radon](https://pypi.org/project/radon/) - code quality
-  - [removestar](https://github.com/asmeurer/removestar) - automated removal of wildcard imports (*)
-  - [pytest](https://docs.pytest.org) - testing
-  - [coverage](https://coverage.readthedocs.io/en/6.2/) - test coverage
-  - [sphinx](https://www.sphinx-doc.org/en/master/) - documentation
-  - [github-pages](https://pages.github.com) - documentation deployment and hosting
-  - [build](https://github.com/pypa/build) - packaging
-  - [twine](https://twine.readthedocs.io/en/stable/pip) - deployment
-- Examples:
-  - Repository tree structure
-  - Python module
-  - Unit tests
+Behave step matcher for [Cucumber Expressions](https://github.com/cucumber/cucumber-expressions).
 
 ## Installation
 
-`pysamplelib` is available via Test PyPI (via [Platform Wheels](https://packaging.python.org/guides/distributing-packages-using-setuptools/#platform-wheels)):
+`behave-cucumber-matcher` is available via [PyPI](https://pypi.org/project/behave_cucumber_matcher/):
 
+```console
+pip install behave-cucumber-matcher
 ```
-pip install --index-url https://test.pypi.org/simple/ pysamplelib
-```
 
-## Examples
+## Usage
 
-Running fizzbuzz against a number:
+Import and patch the matcher into Behave inside `environment.py` in your `features` directory.
 
 ```python
-import pysamplelib
+from behave.matchers import use_step_matcher, matcher_mapping
+from behave_cucumber_matcher import build_step_matcher
+from cucumber_expressions.parameter_type_registry import ParameterTypeRegistry
 
-print(pysamplelib.fizzbuzz(5))
+# Initialise a Cucumber Expressions parameter registry
+parameter_registry = ParameterTypeRegistry()
+
+# Create the step matcher to pass to behave
+step_matcher = build_step_matcher(parameter_registry)
+
+# Patch the step matcher into behave
+matcher_mapping["cucumber_expressions"] = step_matcher
+
+# Specify to use the Cucumber Expressions step matcher
+use_step_matcher("cucumber_expressions")
 ```
 
-Running fizzbuzz against a number range:
+Create a scenario inside `color.feature` in your `features` directory:
+
+```gherkin
+Feature: Color selection
+
+  Rule: User can select a profile color
+
+    Scenario: User selects a valid color
+      Given I am on the profile settings page
+      When I select the theme colour "red"
+      Then the profile colour should be "red"
+```
+
+Create step definitions inside `color.py` in your `features/steps` directory:
 
 ```python
-import pysamplelib
+from behave import given, then, when
+from cucumber_expressions.parameter_type import ParameterType
 
-for number in range(1, 101):
-    print(pysamplelib.fizzbuzz(number))
+from environment import parameter_registry
+
+# Define the parameter type
+color = ParameterType(
+    name="color",
+    regexp="red|blue|yellow",
+    type=str,
+    transformer=lambda s: s,
+    use_for_snippets=True,
+    prefer_for_regexp_match=False,
+)
+
+# Pass the parameter type to the registry instance
+parameter_registry.define_parameter_type(color)
+
+@given("I am on the profile customisation/settings page")
+def step_given(context):
+    assert True
+
+# Reference the parameter type in the step definition pattern
+@when('I select the theme colo(u)r "{color}"')
+def step_when(context, selected_color):
+    assert selected_color
+    context.selected_color = selected_color
+
+@then('the profile colo(u)r should be "{color}"')
+def step_then(context, displayed_color):
+    assert displayed_color
+    assert context.selected_color == displayed_color
 ```
 
-Running fizzbuzz against a number, using a custom keyword mapping:
+The necessary files are now in place to execute your gherkin scenario.
 
-```python
-import pysamplelib
-
-CUSTOM_KEYWORD_MAPPING = {
-    7: "Riff",
-    9: "Blip",
-}
-
-print(pysamplelib.fizzbuzz(7, CUSTOM_KEYWORD_MAPPING))
+```console
+repository/
+  └── features/
+      ├── steps/
+      │   └── color.py
+      ├── environment.py
+      └── color.feature
 ```
+
+Finally, execute Behave. The scenario will run with the step definitions using the Cucumber Expressions parameter type.
+
+```console
+$ behave features
+Feature: Color selection # features/Gherkin.feature:1
+  Rule: User can select a profile color
+  Scenario: User selects a valid color      # features/Gherkin.feature:5
+    Given I am on the profile settings page # features/steps/color.py:20 0.000s
+    When I select the theme colour "red"    # features/steps/color.py:26 0.000s
+    Then the profile colour should be "red" # features/steps/color.py:32 0.000s
+
+1 feature passed, 0 failed, 0 skipped
+1 scenario passed, 0 failed, 0 skipped
+3 steps passed, 0 failed, 0 skipped, 0 undefined
+Took 0m0.001s
+```
+
+For detailed usage of _behave_, see the [official documentation](https://behave.readthedocs.io).
+
+## Acknowledgements
+
+Based on the Behave step matcher base class and built on the architecture of [cuke4behave](https://gitlab.com/cuke4behave/cuke4behave) by [Dev Kumar Gupta](https://github.com/mrkaiser), with extended type hints, a fix for detecting patterns without arguments, a default parameter type registry, additional documentation for arguments and return types and direct import of the matcher at package level rather than via its module.
 
 ## License
 
-`pysamplelib` is licensed under the [MIT License](https://opensource.org/licenses/MIT)
+`behave-cucumber-matcher` is licensed under the [MIT License](https://opensource.org/licenses/MIT)

@@ -1,7 +1,8 @@
 {
   "recommendations": [
+    "charliermarsh.ruff",
+    "cucumberopen.cucumber-official",
     "editorconfig.editorconfig",
-    "ms-python.black-formatter",
     "ms-python.python"
   ]
 }

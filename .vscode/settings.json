@@ -1,6 +1,14 @@
 {
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/__pycache__": true,
+    ".coverage": true,
+    ".*_cache": true
+  },
   "files.trimTrailingWhitespace": true,
   "files.autoSave": "onFocusChange",
   "git.autofetch": true,
@@ -9,9 +17,8 @@
     "files.insertFinalNewline": true
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "charliermarsh.ruff"
   },
-  "python.formatting.provider": "none",
   "python.testing.unittestEnabled": false,
   "python.testing.pytestEnabled": true
 }

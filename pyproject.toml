@@ -9,34 +9,39 @@ authors = [
     { name = "Kieran Ryan" },
 ]
 classifiers = [
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
-    "Operating System :: MacOS",
-    "Operating System :: Microsoft :: Windows",
-    "Operating System :: POSIX :: Linux",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Testing",
 ]
-description = "A sample Python package."
+dependencies = [
+    "behave>=1.2.6",
+    "cucumber-expressions>=10.2.0",
+]
+description = "Behave step matcher for Cucumber Expressions."
 dynamic = [
     "version",
 ]
-name = "pysamplelib"
+name = "behave-cucumber-matcher"
 readme = "README.md"
+requires-python = ">=3.7"
+
+[project.license]
+file = "LICENSE"
 
 [project.urls]
-Documentation = "https://kieran-ryan.github.io/python-package-template/"
-Source = "https://github.com/kieran-ryan/python-package-template"
-Tracker = "https://github.com/kieran-ryan/python-package-template/issues"
-
-[tool.bandit]
-exclude_dirs = [
-    "tests",
-    "venv",
-]
-
-[tool.black]
-preview = true
+Changelog = "https://github.com/kieran-ryan/behave-cucumber-matcher/blob/main/CHANGELOG.md"
+Documentation = "https://github.com/kieran-ryan/behave-cucumber-matcher/blob/main/README.md"
+Source = "https://github.com/kieran-ryan/behave-cucumber-matcher"
+Tracker = "https://github.com/kieran-ryan/behave-cucumber-matcher/issues"
 
 [tool.coverage.html]
 directory = "docs/coverage"
@@ -51,6 +56,7 @@ show_missing = true
 [tool.coverage.run]
 branch = true
 omit = [
+    "*/features/*",
     "*/tests/*",
     "*/venv/*",
 ]
@@ -59,16 +65,17 @@ omit = [
 output = "docs/coverage/coverage.xml"
 
 [tool.flit.module]
-name = "pysamplelib"
+name = "behave_cucumber_matcher"
 
 [tool.isort]
 profile = "black"
-src_paths = "pysamplelib"
+src_paths = "behave_cucumber_matcher"
 
 [tool.mypy]
-exclude = "__init__.py|setup.py|docs|tests|venv"
+exclude = "tests|venv"
 files = "."
-mypy_path = "pysamplelib"
+ignore_missing_imports = true
+mypy_path = "behave_cucumber_matcher"
 
 [tool.pylint]
 ignore = [
@@ -81,7 +88,7 @@ recursive = true
 [tool.pytest.ini_options]
 addopts = "--doctest-modules -rA --verbose"
 testpaths = [
-    "pysamplelib",
+    "behave_cucumber_matcher",
     "tests",
 ]
 
@@ -94,23 +101,19 @@ total_average = true
 [tool.ruff]
 ignore = [
     "ANN",
-    "ARG",
-    "D203",
-    "D213",
-    "DTZ005",
-    "G004",
+    "COM812",
+    "FA100",
     "INP001",
+    "ISC001",
+    "PERF",
     "S101",
-    "T201",
+    "UP007",
+    "UP008",
+    "UP009",
+    "UP035",
 ]
 select = [
     "ALL",
-    "I002",
-]
-
-[tool.ruff.isort]
-required-imports = [
-    "from __future__ import annotations",
 ]
 
 [tool.ruff.pydocstyle]

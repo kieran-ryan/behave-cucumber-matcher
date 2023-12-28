@@ -1,0 +1,2 @@
+behave>=1.2.6
+cucumber-expressions>=10.2.0

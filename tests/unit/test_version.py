@@ -1,11 +1,9 @@
 """Package version unit tests."""
 
-from __future__ import annotations
-
 import packaging.version
 import pytest
 
-from pysamplelib.__version__ import __version__
+from behave_cucumber_matcher.__version__ import __version__
 
 
 @pytest.mark.parametrize(
