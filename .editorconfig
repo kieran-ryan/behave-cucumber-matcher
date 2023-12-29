@@ -3,5 +3,8 @@ root = true
 [*]
 indent_style = space
 
+[*.md]
+indent_size = 2
+
 [Makefile]
 indent_style = tab
