@@ -1,9 +1,10 @@
 # Behave Cucumber Matcher
 
 [![Release version](https://img.shields.io/badge/dynamic/json?color=green&label=version&query=%24.info.version&url=https%3A%2F%2Ftest.pypi.org%2Fpypi%2Fbehave-cucumber-matcher%2Fjson)](https://test.pypi.org/pypi/behave-cucumber-matcher)
-![License](https://img.shields.io/badge/license-MIT-blue)
+[![License](https://img.shields.io/pypi/l/behave-cucumber-matcher.svg)](https://pypi.python.org/pypi/behave-cucumber-matcher)
 [![Python versions](https://img.shields.io/pypi/pyversions/behave-cucumber-matcher.svg)](https://pypi.org/pypi/behave-cucumber-matcher)
 ![Supported platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Windows%20%7C%20Linux-green)
+![Cucumber](https://img.shields.io/badge/cucumber-gray?style=flat&logo=cucumber)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
