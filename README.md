@@ -106,10 +106,10 @@ repository/
 Finally, execute Behave. The scenario will run with the step definitions using the Cucumber Expressions parameter type.
 
 ```console
-$ behave features
-Feature: Color selection # features/Gherkin.feature:1
+$ behave
+Feature: Color selection # features/color.feature:1
   Rule: User can select a profile color
-  Scenario: User selects a valid color      # features/Gherkin.feature:5
+  Scenario: User selects a valid color      # features/color.feature:5
     Given I am on the profile settings page # features/steps/color.py:20 0.000s
     When I select the theme colour "red"    # features/steps/color.py:26 0.000s
     Then the profile colour should be "red" # features/steps/color.py:32 0.000s
