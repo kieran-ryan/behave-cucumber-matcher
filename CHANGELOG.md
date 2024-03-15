@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0] - 2023-12-29
+
 ### Added
 
 - First release of behave matcher for Cucumber Expressions
