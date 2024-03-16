@@ -22,27 +22,17 @@ pip install behave-cucumber-matcher
 
 ## Usage
 
-Import and patch the matcher into Behave inside `environment.py` in your `features` directory.
+Import and specify the matcher inside `environment.py` of your `features` directory.
 
 ```python
-from behave.matchers import use_step_matcher, matcher_mapping
-from behave_cucumber_matcher import build_step_matcher
-from cucumber_expressions.parameter_type_registry import ParameterTypeRegistry
-
-# Initialise a Cucumber Expressions parameter registry
-parameter_registry = ParameterTypeRegistry()
-
-# Create the step matcher to pass to behave
-step_matcher = build_step_matcher(parameter_registry)
-
-# Patch the step matcher into behave
-matcher_mapping["cucumber_expressions"] = step_matcher
+from behave.matchers import use_step_matcher
+from behave_cucumber_matcher import CUCUMBER_EXPRESSIONS_MATCHER
 
 # Specify to use the Cucumber Expressions step matcher
-use_step_matcher("cucumber_expressions")
+use_step_matcher(CUCUMBER_EXPRESSIONS_MATCHER)
 ```
 
-Create a scenario inside `color.feature` in your `features` directory:
+Create a scenario inside `color.feature` of your `features` directory:
 
 ```gherkin
 Feature: Color selection
@@ -55,7 +45,7 @@ Feature: Color selection
       Then the profile colour should be "red"
 ```
 
-Create step definitions inside `color.py` in your `features/steps` directory:
+Create step definitions inside `color.py` of your `features/steps` directory:
 
 ```python
 from behave import given, then, when
@@ -124,7 +114,7 @@ For detailed usage of _behave_, see the [official documentation](https://behave.
 
 ## Acknowledgements
 
-Based on the Behave step matcher base class and built on the architecture of [cuke4behave](https://gitlab.com/cuke4behave/cuke4behave) by [Dev Kumar Gupta](https://github.com/mrkaiser), with extended type hints, a fix for detecting patterns without arguments, a default parameter type registry, additional documentation for arguments and return types and direct import of the matcher at package level rather than via its module.
+Based on the Behave step matcher base class and built on the architecture of [cuke4behave](https://gitlab.com/cuke4behave/cuke4behave) by [Dev Kumar Gupta](https://github.com/mrkaiser), with extended type hints, a fix for detecting patterns without arguments, a default parameter type registry, additional documentation for arguments and return types, direct import of the matcher at package level rather than via its module, and a global parameter type registry.
 
 ## License
 

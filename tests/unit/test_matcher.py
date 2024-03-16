@@ -1,10 +1,12 @@
 """Matcher unit tests."""
 
+import behave.matchers
 import pytest
 from behave.model_core import Argument
 from cucumber_expressions.parameter_type_registry import ParameterTypeRegistry
 
 from behave_cucumber_matcher.matcher import (
+    CUCUMBER_EXPRESSIONS_MATCHER,
     CucumberExpressionMatcher,
     build_step_matcher,
 )
@@ -82,3 +84,8 @@ def test_build_matcher_is_callable():
     matcher = build_step_matcher(registry)
     assert callable(matcher)
     assert matcher(print, "I have {int} cukes in my {word} now")
+
+
+def test_matcher_patched_into_behave():
+    """Matcher is patched into Behave step matchers."""
+    assert CUCUMBER_EXPRESSIONS_MATCHER in behave.matchers.matcher_mapping
