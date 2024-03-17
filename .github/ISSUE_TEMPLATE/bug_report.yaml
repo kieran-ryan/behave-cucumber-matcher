@@ -4,7 +4,7 @@ labels: [":bug: bug"]
 body:
   - type: markdown
     attributes:
-      value: |
+      value: >
         Thanks for taking the time to fill out this bug report!
   - type: textarea
     id: what-happened
@@ -34,10 +34,11 @@ body:
     id: how-to-reproduce
     attributes:
       label: 🔬 How could we reproduce it?
-      description: |
+      description: >
         It order to fix the problem, we need to be able to reproduce it.
         A [Minimal Reproducible Example](https://stackoverflow.com/help/minimal-reproducible-example) can be really helpful for anyone
         trying to diagnose and fix the problem.
+
 
         Please outline the steps below:
       placeholder: |
