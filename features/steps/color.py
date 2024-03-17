@@ -2,7 +2,8 @@
 
 from behave import given, then, when
 from cucumber_expressions.parameter_type import ParameterType
-from environment import parameter_registry
+
+from behave_cucumber_matcher import parameter_registry
 
 # Define the parameter type
 color_parameter = ParameterType(

@@ -3,10 +3,14 @@
 
 from typing import Any, Callable, List, Optional
 
-from behave.matchers import Matcher
+from behave.matchers import Matcher, matcher_mapping
 from behave.model_core import Argument
 from cucumber_expressions.expression import CucumberExpression
 from cucumber_expressions.parameter_type_registry import ParameterTypeRegistry
+
+CUCUMBER_EXPRESSIONS_MATCHER = "cucumber_expressions"
+
+parameter_registry = ParameterTypeRegistry()
 
 
 class CucumberExpressionMatcher(Matcher):
@@ -89,3 +93,8 @@ def build_step_matcher(
         )
 
     return step_matcher
+
+
+# Register the Cucumber Expressions step matcher with Behave
+step_matcher = build_step_matcher(parameter_registry)
+matcher_mapping[CUCUMBER_EXPRESSIONS_MATCHER] = step_matcher
