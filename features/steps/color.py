@@ -3,18 +3,13 @@
 from behave import given, then, when
 from cucumber_expressions.parameter_type import ParameterType
 
-from behave_cucumber_matcher import parameter_registry
-
 # Define the parameter type
-color_parameter = ParameterType(
+ParameterType(
     name="color",
     regexp="red|blue|yellow",
     type=str,
     transformer=lambda s: s,
 )
-
-# Pass the parameter type to the registry instance
-parameter_registry.define_parameter_type(color_parameter)
 
 
 @given("I am on the profile customisation/settings page")

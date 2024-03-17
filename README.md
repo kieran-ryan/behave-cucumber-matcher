@@ -49,19 +49,15 @@ Create step definitions inside `color.py` of your `features/steps` directory:
 
 ```python
 from behave import given, then, when
-from behave_cucumber_matcher import parameter_registry
 from cucumber_expressions.parameter_type import ParameterType
 
 # Define the parameter type
-color = ParameterType(
+ParameterType(
     name="color",
     regexp="red|blue|yellow",
     type=str,
     transformer=lambda s: s,
 )
-
-# Pass the parameter type to the registry instance
-parameter_registry.define_parameter_type(color)
 
 @given("I am on the profile customisation/settings page")
 def step_given(context):

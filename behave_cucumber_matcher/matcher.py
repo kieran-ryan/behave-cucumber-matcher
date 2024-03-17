@@ -32,6 +32,7 @@ class ParameterTypeOverrides(cucumber_expressions.parameter_type.ParameterType):
             prefer_for_regexp_match=prefer_for_regexp_match,
             **kwargs,
         )
+        parameter_registry.define_parameter_type(self)
 
 
 cucumber_expressions.parameter_type.ParameterType = ParameterTypeOverrides
