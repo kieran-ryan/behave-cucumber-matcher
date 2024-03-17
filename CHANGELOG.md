@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [0.1.0] - 2023-12-29
+### Added
+
+- Global parameter type registry ([#13](https://github.com/kieran-ryan/behave-cucumber-matcher/pull/13))
+
+## 0.1.0 - 2023-12-29
 
 ### Added
 
