@@ -58,8 +58,6 @@ color = ParameterType(
     regexp="red|blue|yellow",
     type=str,
     transformer=lambda s: s,
-    use_for_snippets=True,
-    prefer_for_regexp_match=False,
 )
 
 # Pass the parameter type to the registry instance
@@ -113,7 +111,7 @@ For detailed usage of _behave_, see the [official documentation](https://behave.
 
 ## Acknowledgements
 
-Based on the Behave step matcher base class and built on the architecture of [cuke4behave](https://gitlab.com/cuke4behave/cuke4behave) by [Dev Kumar Gupta](https://github.com/mrkaiser), with extended type hints, a fix for detecting patterns without arguments, a default parameter type registry, additional documentation for arguments and return types, direct import of the matcher at package level rather than via its module, and a global parameter type registry.
+Based on the Behave step matcher base class and built on the architecture of [cuke4behave](https://gitlab.com/cuke4behave/cuke4behave) by [Dev Kumar Gupta](https://github.com/mrkaiser), with extended type hints, a fix for detecting patterns without arguments, a default parameter type registry, additional documentation for arguments and return types, direct import of the matcher at package level rather than via its module, backwards compatibility with Cucumber Expressions missing parameter type defaults, and a global parameter type registry.
 
 ## License
 

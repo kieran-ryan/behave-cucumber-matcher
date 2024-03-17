@@ -3,6 +3,7 @@
 import behave.matchers
 import pytest
 from behave.model_core import Argument
+from cucumber_expressions.parameter_type import ParameterType
 from cucumber_expressions.parameter_type_registry import ParameterTypeRegistry
 
 from behave_cucumber_matcher.matcher import (
@@ -89,3 +90,18 @@ def test_build_matcher_is_callable():
 def test_matcher_patched_into_behave():
     """Matcher is patched into Behave step matchers."""
     assert CUCUMBER_EXPRESSIONS_MATCHER in behave.matchers.matcher_mapping
+
+
+def test_no_exception_without_parameter_type_defaults():
+    """Compatible with earlier Cucumber Expressions versions.
+
+    Cucumber Expressions below 17.0.2 do not set expected defaults
+    for `use_for_snippets` and `prefer_for_regexp_match` in the
+    parameter type.
+    """
+    ParameterType(
+        name="color",
+        regexp="red|blue|yellow",
+        type=str,
+        transformer=lambda s: s,
+    )
