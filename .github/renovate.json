@@ -1,0 +1,13 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":preserveSemverRanges",
+    ":rebaseStalePrs",
+    ":disableDependencyDashboard",
+    ":automergeBranch",
+    ":automergeMinor"
+  ],
+  "labels": [":robot: dependencies"],
+  "prHourlyLimit": 0
+}
