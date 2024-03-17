@@ -76,7 +76,8 @@ def test_cucumber_expression_to_regex_pattern():
 def test_build_matcher_without_parameter_type_registry():
     """Matcher built without parameter type registry does not throw exception."""
     matcher = build_step_matcher()
-    assert matcher
+    assert callable(matcher)
+    assert matcher(print, "I have {int} cukes in my {word} now")
 
 
 def test_build_matcher_is_callable():

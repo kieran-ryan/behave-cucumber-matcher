@@ -11,6 +11,7 @@ from cucumber_expressions.parameter_type_registry import ParameterTypeRegistry
 
 CUCUMBER_EXPRESSIONS_MATCHER = "cucumber_expressions"
 
+# Create a global parameter registry
 parameter_registry = ParameterTypeRegistry()
 
 
@@ -34,6 +35,7 @@ class ParameterTypeOverrides(cucumber_expressions.parameter_type.ParameterType):
         )
 
 
+# Override the ParameterType class with extended behaviour
 cucumber_expressions.parameter_type.ParameterType = ParameterTypeOverrides
 
 
@@ -44,7 +46,7 @@ class CucumberExpressionMatcher(Matcher):
         self,
         func: Callable,
         pattern: str,
-        parameter_type_registry: Optional[ParameterTypeRegistry] = None,
+        parameter_type_registry: ParameterTypeRegistry = parameter_registry,
     ):
         """Initialise CucumberExpressionMatcher.
 
@@ -53,13 +55,11 @@ class CucumberExpressionMatcher(Matcher):
             pattern: The match pattern attached to the step function.
             parameter_type_registry: The Cucumber parameter type registry to use.
         """
-        super(CucumberExpressionMatcher, self).__init__(func, pattern)
-        self.parameter_type_registry = (
-            parameter_type_registry or ParameterTypeRegistry()
-        )
+        super().__init__(func, pattern)
+        self.parameter_type_registry = parameter_type_registry
         self.__cucumber_expression = CucumberExpression(
-            pattern,
-            self.parameter_type_registry,
+            expression=pattern,
+            parameter_type_registry=self.parameter_type_registry,
         )
 
     def check_match(self, step: str) -> Optional[List[Argument]]:
@@ -95,7 +95,7 @@ class CucumberExpressionMatcher(Matcher):
 
 
 def build_step_matcher(
-    parameter_type_registry: Optional[ParameterTypeRegistry] = None,
+    parameter_type_registry: ParameterTypeRegistry = parameter_registry,
 ) -> Callable[[Callable[..., Any], str], CucumberExpressionMatcher]:
     """Build a Behave step matcher for Cucumber Expressions.
 
@@ -113,7 +113,7 @@ def build_step_matcher(
         return CucumberExpressionMatcher(
             func,
             pattern,
-            parameter_type_registry=parameter_type_registry,
+            parameter_type_registry,
         )
 
     return step_matcher

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## Fixed
+
+- Default to global rather than a new parameter type registry if none specified
+
 ## 0.3.0 - 2024-03-17
 
 ### Added
