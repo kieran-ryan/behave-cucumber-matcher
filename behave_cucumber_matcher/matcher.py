@@ -3,6 +3,7 @@
 
 from typing import Any, Callable, List, Optional
 
+import cucumber_expressions.parameter_type
 from behave.matchers import Matcher, matcher_mapping
 from behave.model_core import Argument
 from cucumber_expressions.expression import CucumberExpression
@@ -11,6 +12,29 @@ from cucumber_expressions.parameter_type_registry import ParameterTypeRegistry
 CUCUMBER_EXPRESSIONS_MATCHER = "cucumber_expressions"
 
 parameter_registry = ParameterTypeRegistry()
+
+
+class ParameterTypeOverrides(cucumber_expressions.parameter_type.ParameterType):
+    """Matcher compatibility for Cucumber Expressions parameter types."""
+
+    def __init__(  # noqa: D107
+        self,
+        *args,
+        # Fixes missing defaults in Cucumber Expressions below 17.0.2
+        # See https://github.com/cucumber/cucumber-expressions/pull/259
+        use_for_snippets: bool = True,
+        prefer_for_regexp_match: bool = False,
+        **kwargs,
+    ):
+        super().__init__(
+            *args,
+            use_for_snippets=use_for_snippets,
+            prefer_for_regexp_match=prefer_for_regexp_match,
+            **kwargs,
+        )
+
+
+cucumber_expressions.parameter_type.ParameterType = ParameterTypeOverrides
 
 
 class CucumberExpressionMatcher(Matcher):

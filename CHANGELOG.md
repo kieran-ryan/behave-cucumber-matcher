@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+
+- Compatibility with parameter types missing intended defaults ([#14](https://github.com/kieran-ryan/behave-cucumber-matcher/pull/14))
+
 ## 0.2.0 - 2024-03-17
 
 ### Added
