@@ -95,13 +95,12 @@ def test_matcher_patched_into_behave():
 def test_no_exception_without_parameter_type_defaults():
     """Compatible with earlier Cucumber Expressions versions.
 
-    Cucumber Expressions below 17.0.2 do not set expected defaults
-    for `use_for_snippets` and `prefer_for_regexp_match` in the
-    parameter type.
+    Cucumber Expressions below or equal to 17.0.2 do not set
+    expected defaults for `transformer`, `use_for_snippets`
+    and `prefer_for_regexp_match` in the parameter type.
     """
     ParameterType(
         name="color",
         regexp="red|blue|yellow",
         type=str,
-        transformer=lambda s: s,
     )
