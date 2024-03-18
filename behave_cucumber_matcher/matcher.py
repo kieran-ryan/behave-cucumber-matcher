@@ -20,7 +20,7 @@ class ParameterTypeOverrides(cucumber_expressions.parameter_type.ParameterType):
     def __init__(  # noqa: D107
         self,
         *args,
-        type: Callable,  # noqa: A002
+        type: Any,  # noqa: A002
         # Fixes missing defaults in Cucumber Expressions below or equal to 17.0.2
         transformer: Optional[Callable] = None,
         # Fixes missing defaults in Cucumber Expressions below 17.0.2
