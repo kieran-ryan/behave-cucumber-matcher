@@ -20,14 +20,20 @@ class ParameterTypeOverrides(cucumber_expressions.parameter_type.ParameterType):
     def __init__(  # noqa: D107
         self,
         *args,
+        type: Callable,  # noqa: A002
+        # Fixes missing defaults in Cucumber Expressions below or equal to 17.0.2
+        transformer: Optional[Callable] = None,
         # Fixes missing defaults in Cucumber Expressions below 17.0.2
         # See https://github.com/cucumber/cucumber-expressions/pull/259
         use_for_snippets: bool = True,
         prefer_for_regexp_match: bool = False,
         **kwargs,
     ):
+        transformer = transformer or (lambda value: type(value))
         super().__init__(
             *args,
+            type=type,
+            transformer=transformer,
             use_for_snippets=use_for_snippets,
             prefer_for_regexp_match=prefer_for_regexp_match,
             **kwargs,
