@@ -1,6 +1,6 @@
 # Behave Cucumber Matcher
 
-[![Release version](https://img.shields.io/badge/dynamic/json?color=green&label=version&query=%24.info.version&url=https%3A%2F%2Ftest.pypi.org%2Fpypi%2Fbehave-cucumber-matcher%2Fjson)](https://test.pypi.org/pypi/behave-cucumber-matcher)
+[![Release version](https://img.shields.io/pypi/v/behave-cucumber-matcher.svg?color=green)](https://pypi.python.org/pypi/ruff)
 [![License](https://img.shields.io/pypi/l/behave-cucumber-matcher.svg)](https://pypi.python.org/pypi/behave-cucumber-matcher)
 [![Python versions](https://img.shields.io/pypi/pyversions/behave-cucumber-matcher.svg)](https://pypi.org/pypi/behave-cucumber-matcher)
 ![Supported platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Windows%20%7C%20Linux-green)
