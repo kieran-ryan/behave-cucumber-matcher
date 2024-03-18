@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 0.4.0 - 2024-03-18
+
 ### Added
 
 - Compatibility with parameter types missing transformer default ([#16](https://github.com/kieran-ryan/behave-cucumber-matcher/pull/16))
