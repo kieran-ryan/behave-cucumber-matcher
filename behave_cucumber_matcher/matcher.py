@@ -22,6 +22,7 @@ class ParameterTypeOverrides(cucumber_expressions.parameter_type.ParameterType):
         *args,
         type: Any,  # noqa: A002
         # Fixes missing defaults in Cucumber Expressions below or equal to 17.0.2
+        # See https://github.com/cucumber/cucumber-expressions/pull/288
         transformer: Optional[Callable] = None,
         # Fixes missing defaults in Cucumber Expressions below 17.0.2
         # See https://github.com/cucumber/cucumber-expressions/pull/259
