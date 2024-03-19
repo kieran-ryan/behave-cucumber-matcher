@@ -67,10 +67,6 @@ output = "docs/coverage/coverage.xml"
 [tool.flit.module]
 name = "behave_cucumber_matcher"
 
-[tool.isort]
-profile = "black"
-src_paths = "behave_cucumber_matcher"
-
 [tool.mypy]
 exclude = "tests|venv"
 files = "."
@@ -98,7 +94,7 @@ show_complexity = true
 show_mi = true
 total_average = true
 
-[tool.ruff]
+[tool.ruff.lint]
 ignore = [
     "ANN",
     "COM812",
@@ -116,5 +112,5 @@ select = [
     "ALL",
 ]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"

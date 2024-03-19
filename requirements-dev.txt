@@ -5,4 +5,4 @@ pre-commit==3.6.2
 pyprojectsort==0.3.0
 radon[toml]==6.0.1
 removestar==1.5
-ruff==0.1.9
+ruff==0.3.3
